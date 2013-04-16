@@ -24,7 +24,7 @@
 <ul>
 {% for todo in latest_todo_list %}
 <li {% if todo.closed %}class="closed"{% endif %}>
-{{ todo.title }} [<a href="{% url 'todos:close' todo.id %}">x</a>]
+{{ todo.title }} [<a href="{% url 'todos:close' todo.id %}">close</a>]
 [<a href="{% url 'todos:edit' todo.id %}">edit</a>]
 </li>
 {% endfor %}
