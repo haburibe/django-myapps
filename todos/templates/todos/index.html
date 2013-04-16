@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<style type="text/css">
+	.closed { text-decoration: line-through; }
+</style>
+<h1>Todo</h1>
+
+{% if messages %}
+<ul class="messages">
+	{% for massage in messages %}
+	<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	{% endfor %}
+</ul>
+{% endif %}
+
+<form action="{% url 'todos:add' %}" method="post">
+	{% csrf_token %}
+	<table>
+		{{ form }}
+	</table>
+	<input type="submit" value="Add" />
+</form>
+
+{% if latest_todo_list %}
+<ul>
+{% for todo in latest_todo_list %}
+<li {% if todo.closed %}class="closed"{% endif %}>
+{{ todo.title }} [<a href="{% url 'todos:close' todo.id %}">x</a>]
+[<a href="{% url 'todos:edit' todo.id %}">edit</a>]
+</li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No todos are available.</p>
+{% endif %}
+
