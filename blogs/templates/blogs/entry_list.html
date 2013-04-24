@@ -1,0 +1,57 @@
+{% extends 'blogs/layout.html' %}
+
+{% block style %}
+	.pagination {
+		font-size: small;
+		text-align: center;
+	}
+{% endblock %}
+
+{% block page_footer %}
+	<div class="pagination">
+		<span class="step-links">
+			{% if entries.has_previous %}
+			<a href="?page={{ entries.previous_page_number }}">&lt;&lt; previous</a>
+			{% endif %}
+			
+			<span class="current">
+				Page {{ entries.number }} of {{ entries.paginator.num_pages }}.
+			</span>
+
+			{% if entries.has_next %}
+			<a href="?page={{ entries.next_page_number }}">next &gt;&gt;</a>
+			{% endif %}
+	</div>
+{% endblock %}
+
+{% block content %}
+	{% if not entries %}
+	There is no entry.
+	{% endif %}
+
+	{% for entry in entries %}
+	<article class="entry">
+		<header>
+			<p><time class="entry_pub_date">{{ entry.pub_date|date:'Y-m-d H:i' }}</time></p>
+			<h2 class="entry_title">
+				<a href="{% url 'blogs:detail_entry' entry.id %}">{{ entry.title }}</a>
+			</h2>
+		</header>
+		<p class="entry_contents">{{ entry.contents|linebreaksbr }}</p>
+		<footer>
+			<p class="entry_tags">Tags: 
+			{% for tag in entry.tags.all %}
+				<a href="{% url 'blogs:tagged_entry_list' tag %}">{{ tag }}</a>
+			{% endfor %}
+			</p>
+			<p class="entry_author">Author: <a href="{% url 'blogs:user_home' entry.user.username %}">{{ entry.user.username }}</a></p>
+			{% if user == entry.user %}
+			<p class="entry_commands">
+				<a href="{% url 'blogs:edit_entry' entry.id %}">edit</a> |
+				<a href="{% url 'blogs:delete_entry' entry.id %}">delete</a>
+			</p>
+			{% endif %}
+		</footer>
+	</article>
+	{% endfor %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'blogs/layout.html' %}
+
+{% block content %}
+<table>
+	<tr>
+		<th>User</th>
+		<th>Entry</th>
+	</tr>
+	{% for user in users %}
+	<tr>
+		<td><a href="{% url 'blogs:user_home' user.username %}">{{ user.username }}</a></td>
+		<td>{{ user.entry_set.count }}</td>
+	</tr>
+	{% endfor %}
+</table>
+{% endblock %}

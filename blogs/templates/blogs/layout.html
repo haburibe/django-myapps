@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<title>Blog</title>
+		{% load staticfiles %}
+		<link rel="stylesheet" href="{% static 'blogs/style.css' %}" />
+		<style type="text/css">
+		{% block style %}{% endblock %}
+		</style>
+	</head>
+	<body>
+		<header class="page_header">
+			<h1 class="page_title"><a href="{% url 'blogs:index' %}">Blog</a></h1>
+			<nav>
+				<ul class="nav_bar">
+					{% if user.is_authenticated %}
+					<li><a href="{% url 'blogs:create_entry' %}">New Entry</a></li>
+					<li><a href="{% url 'blogs:logout' %}">Logout</a></li>
+					{% else %}
+					<li><a href="{% url 'blogs:login' %}">Login</a></li>
+					{% endif %}
+					<li><a href="{% url 'blogs:tag_list' %}">Tags</a></li>
+					<li><a href="{% url 'blogs:user_list' %}">Users</a></li>
+				</ul>
+				{% if messages %}
+				<ul class="messages">
+					{% for message in messages %}
+					<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+					{% endfor %}
+				</ul>
+				{% endif %}
+			</nav>
+		</header>
+		<div id="page_contents">
+			{% block content %}{% endblock %}
+		</div>
+		<footer class="page_footer">
+			{% block page_footer %}{% endblock %}
+		</footer>
+	</body>
+</html>

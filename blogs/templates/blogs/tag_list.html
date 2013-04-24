@@ -1,0 +1,16 @@
+{% extends 'blogs/layout.html' %}
+
+{% block content %}
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Entry</th>
+	</tr>
+	{% for tag in tags %}
+	<tr>
+		<td><a href="{% url 'blogs:tagged_entry_list' tag.name%}">{{ tag.name }}</a></td>
+		<td>{{ tag.tags.count }}</td>
+	</tr>
+	{% endfor %}
+</table>
+{% endblock %}

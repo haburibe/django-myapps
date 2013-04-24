@@ -1,0 +1,16 @@
+{% extends 'blogs/layout.html' %}
+
+{% block content %}
+<form action="{% url 'blogs:create_entry' %}" method="post">
+	{% csrf_token %}
+	<dl>
+		<dt>Title:</dt>
+		<dd><input type="text" name="title" /></dd>
+		<dt>Contents:</dt>
+		<dd><textarea id="contents" name="contents" rows="10" cols="50"></textarea></dd>
+		<dt>Tags:</dt>
+		<dd><input type="text" name="tags" /></dd>
+	</dl>
+	<input type="submit" value="submit" />
+</form>
+{% endblock %}
