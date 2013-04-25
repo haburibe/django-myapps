@@ -1,0 +1,43 @@
+body {
+	font-family: 'Courier New', sans-serif;
+	width: 600px;
+	margin: 1em auto;
+}
+.page_header {
+	border-bottom: 1px solid #ccf;
+	padding-bottom: 1em;
+}
+form {
+	text-align: center;
+}
+form > table {
+	width: 100%;
+}
+form > table th {
+	text-align: right;
+	width: 20%
+}
+form > table td {
+	text-align: left;
+}
+.errorlist {
+	padding: 0;
+	margin: 0;
+	float: right;
+	list-style: none;
+}
+.errorlist > li {
+	height: 1em;
+	color: #f30;
+	padding: 0;
+	margin: 0;
+	font-size: small;
+}
+.entry {
+	border-bottom: 1px solid #ccf;
+	margin: 1em 0;
+	padding: 0 1em;
+}
+.entry > h1 {
+	margin: 0.5em 0;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Photo Upload</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'photos/style.css' %}" />
+</head>
+<body>
+	<header class="page_header">
+		<h1>Photo Upload</h1>
+		<form action="{% url 'photos:upload_file' %}" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			<table>
+			{{ form }}
+			</table>
+			<input type="submit" />
+		</form>
+	</header>
+	<div class="page_contents">
+		{% for entry in entries %}
+		<article class="entry">
+			<h1>{{ entry.comment }}</h1>
+			<img src="{{ entry.photo.url }}" alt="{{ entry.comment }}" />
+		</article>
+		{% endfor %}
+	</div>
+</body>
+</html>
